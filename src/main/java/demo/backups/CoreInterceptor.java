@@ -17,15 +17,15 @@ public class CoreInterceptor implements HandlerInterceptor{
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
 		
-//		System.out.println("进入拦截器");
-//		
-//        if(request.getSession().getAttribute("loginName") == null){
-//        	request.getSession().setAttribute("backnews","您还没有登录哦（｡ò ∀ ó｡）");
-//        	System.out.println(request.getSession().getAttribute("backnews"));
-//    		response.sendRedirect("/Login");
-//    		return false;
-//        }
-//        
+		System.out.println("进入拦截器");
+		
+        if(request.getSession().getAttribute("loginName") == null){
+        	request.getSession().setAttribute("backnews","您还没有登录哦（｡ò ∀ ó｡）");
+        	System.out.println(request.getSession().getAttribute("backnews"));
+    		response.sendRedirect("/Login");
+    		return false;
+        }
+        
 		return true;
 	}
 

@@ -18,10 +18,10 @@ public class ScheduledTasks {
 	//cron = "0 0 0 ? * MON"
     @Scheduled(fixedRate = 3000/*cron = "0 0 0 ? * MON"*/)
     public void reportCurrentTime() {
-    	 //System.out.println("数据库备份----------");  
+    	 System.out.println("数据库备份----------");  
     	 try {  
              if (exportDatabaseTool("127.0.0.1", "root", "", "E:/", "cfxt"+account+".sql", "cfxt")) {  
-                 System.out.println("数据库成功备份"+account);  
+                  System.out.println("数据库成功备份"+account);  
                  account++;
              } else {  
                  System.out.println("数据库备份失败");  

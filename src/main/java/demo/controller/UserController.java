@@ -54,12 +54,13 @@ public class UserController {
     				MD5.verify(password, user.getPassword())&&
     				user.getStatus()==status){
     			session.setAttribute("uid",user.getUid()); 
+    			request.getSession().setAttribute("loginName",phone);
     			if(status==0){
     				String uidcard = user.getIdcard();
     				if(uidcard.equals("")||uidcard==null){
     					return "perfectmsg";
     				}
-    				return "xs";
+    				return "studentMain";
     			}else if(status==1){
     				return "ls";
     			}else if(status==2){

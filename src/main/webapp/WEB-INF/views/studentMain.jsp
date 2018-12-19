@@ -3,19 +3,18 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>
     学生信息管理平台
 </title><link href="Style/StudentStyle.css" rel="stylesheet" type="text/css" /><link href="Script/jBox/Skins/Blue/jbox.css" rel="stylesheet" type="text/css" /><link href="Style/ks.css" rel="stylesheet" type="text/css" />
-    <script src="Script/jBox/jquery-1.4.2.min.js" type="text/javascript"></script>
-    <script src="Script/jBox/jquery.jBox-2.3.min.js" type="text/javascript"></script>
-    <script src="Script/jBox/i18n/jquery.jBox-zh-CN.js" type="text/javascript"></script>
-    <script src="Script/Common.js" type="text/javascript"></script>
-    <script src="Script/Data.js" type="text/javascript"></script>
+<link href="/Style/my.css" rel="stylesheet" type="text/css" />
+    <script src="/Script/jBox/jquery-1.4.2.min.js" type="text/javascript"></script>
+    <script src="/Script/jBox/jquery.jBox-2.3.min.js" type="text/javascript"></script>
+    <script src="/Script/jBox/i18n/jquery.jBox-zh-CN.js" type="text/javascript"></script>
+    <script src="/Script/Common.js" type="text/javascript"></script>
+    <script src="/Script/Data.js" type="text/javascript"></script>
     <script type="text/javascript">
         $().ready(function () {
             setStudMsgHeadTabCheck();
@@ -88,111 +87,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
     </script>
     
-<script type="text/javascript" language="javascript">
-
- /*   function confirmStatus(pid, ptype) {
-        if (confirm("确定立即缴费么？") == true) {
-            financialInfor.modifyStudentPaymentStatus(pid, ptype, function (data) {
-                var result = $.parseJSON(data);
-                if ((String(result.ok) == "true")) {
-                    jBox.alert(result.message, "提示");
-                    setTimeout(function () {
-                        window.location.reload();
-                    }, 1500);
-                }
-                else {
-                    $.jBox.error(result.message, '提示');
-                }
-            });
-        }
-    }*/
-    
- function confirmStatus(signid){
-  		var r=confirm("是否确认缴费?!");
-		if(r==true){
-				$.ajax({
-					url : "/pay",
-					type : "POST", 
-					data :{
-							'signid' : signid
-					},
-					success : function(data){
-						if(data != null){
-							alert(data);
-							window.location.href = 'PayInfo'
-						}
-					}
-				});
-		}
-	}
- 
-
-    function submitObjection(pid) {
-        var mtitle = "缴费有异议";
-        var html = "<div style='padding:10px;'><div style='width:65px; height:120px; float:left;'>异议内容：</div><div style='width:250px; height:120px; float:left;'><textarea id='objeCont' name='objeCont' style='width:250px; height:105px;'></textarea></div></div>";
-
-        var submit = function (v, h, f) {
-            if (f.objeCont == '' || f.objeCont.length > 80) {
-                $.jBox.tip("请您输入异议内容，且不超过80个字！", 'error', { focusId: "objeCont" }); // 关闭设置 objeCont 为焦点
-                return false;
-            }
-
-            StudentCompain.insertCompain('', mtitle, 2, f.objeCont, function (data) {
-                var obj = $.parseJSON(data);
-                var resultObj = false;
-                if (obj.ok) {
-                    financialInfor.modifyStudentPaymentStatus(pid, 3, function (data) {
-                        var result = $.parseJSON(data);
-                        if ((String(result.ok) == "true")) {
-                            jBox.alert("成功提交异议！", "提示");
-                            setTimeout(function () {
-                                window.location.reload();
-                            }, 1500);
-                        }
-                        else {
-                            jBox.tip("提交异议失败！");
-                            return false;
-                        }
-                    });
-                }
-                else {
-                    jBox.tip("提交异议失败！");
-                }
-            });
-        };
-
-        $.jBox(html, { title: "提交异议", submit: submit });
-    }
-    
-    $.ajax({
-				url : "/pay",
-				type : "POST", 
-				data :{
-						'password' : oldPwd,
-						'newpassword' : newPwd
-				},
-				success : function(data){
-					if(data != null){
-						alert(data);
-							
-					}
-				}
-			});
-</script>
+    <script src="Script/changeOption.js" type="text/javascript"></script>
+    <script src="Script/rl.js" type="text/javascript"></script>
 </head>
 <body>
 
- <div class="banner">
+
+
+    <div class="banner">
         <div class="bgh">
             <div class="page">
                 <div id="logo">
-                    <a href="index.jsp">
+                    <a href="login">
                         <img src="Images/Student/logo.png" alt="" width="200" height="80" style="margin-top: -15px;"/>
                     </a>
                 </div>
                 <div class="topxx" style="padding-top: 20px;font-size: 12px;">
                      	学员：小明，欢迎您！ <a href="myinfo">我的信息</a> <a href="InfoNotice">
-                        通知</a> <a href="chPwd">密码修改</a> <a href="login">安全退出</a>
+                        通知</a> <a href="chPwd">密码修改</a> <a 
+                            href="login">安全退出</a>
                 </div>
                 
             </div>
@@ -255,59 +168,53 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <div>
                             <a href="#">温馨提示</a></div>
                         <div>
-                         	<a href="studentMain">回到主页</a></div>
+                        	<a href="#">返回主页</a></div>
                         <div>
                     </div>
-
+ 				  </div>
                 </div>
             </div>
+<div class="rightbox">
+
+    <div class="dhbg">
+        <div class="dh1" style="margin: 0 27px 15px 0;">
+            <div class="dhwz">
+                <p>
+                    你应交<span class="blue">10</span> 元，实缴 <span class="green">10</span>元</p>
+                    <p>
+                    欠费 <span class="red">20</span> 元</p>
+                <p>
+                <div class="btright">
+                    <a href="PayInfo.jsp">
+                        查看缴费信息</a></div>
             </div>
-            <div class="rightbox">
-
-<h2 class="mbx">个人中心 &gt; 缴费信息</h2>
-<div class="cztable">
-   
-<div>
-注：请仔细查看自己的缴费信息，如无缴费请点击“<span class="red">立即缴费</span>”，如有问题请点击“<span class="red">有异议</span>”。 <br />
- <br />
-
-    <table border="0" cellspacing="0" cellpadding="0" width="100%">
-        <tr align="center">
-       		<th>序号</th>
-            <th>缴费科目</th>
-            <th>缴费金额</th>
-            <th>截止缴费时间</th>
-            <th>操作</th>
-        </tr>
-        <c:forEach items="${signList}" var="sl" varStatus="status">
-        <tr>
-            <td style="text-align:center">${status.index + 1}</td>
-            <td>${sl.subject}</td>
-            <td>${sl.price}</td>
-            <td><fmt:formatDate value="${sl.testtime}" var="date" pattern="yyyy-MM-dd hh:mm:ss"/>${date}</td>
-            <td>
-            	<c:choose>
-					    <c:when test="${sl.status == '1'}">
-					    <a style="color:green">[已缴费]</a> &nbsp; &nbsp;
-					    </c:when>
-					    <c:otherwise>
-					    <a href="javascript:;" id="jiaofei" onclick="confirmStatus('${sl.signid}')">[立即缴费]</a> &nbsp; &nbsp;
-					    </c:otherwise>
-				</c:choose>
-                <a href="javascript:;" onclick="submitObjection('95c4b378-6de2-41f6-a2cf-6b0e27b562f3')">[有异议]</a>
-            </td>
-        </tr>
+        </div>
+        <div class="dh2">
+            <div class="dhwz">
+                <p>
+                    你有 <span class="red">2</span> 门课程要考 <a href="EducationCenter/Application.aspx.html" class="red">查看报考计划</a></p>
+                <p>
+                    你已经通过 <span class="red">0 </span>门课程&nbsp;共有 <span class="red">2</span> 门 <a href="EducationCenter/Score.aspx.html" class="red">查看成绩</a>
+                </p>
+            </div>
+        </div>
         
-</c:forEach>
-   	</table>
-</div>
-</div>
-</div>
+    </div>
+
+    <div class="c-right-newslist">
+            <ul class="c-right-newslist-ul">
+                <li><span class="square"></span><a style="width:500px;" href="index.php?c=index&amp;a=news_detail&amp;id=3824&amp;web=chinese">关于格致楼原玻璃房乒乓室改为自修室的通知</a><span class="date2">2018-11-26</span></li><li><span class="square"></span><a style="width:500px;" href="index.php?c=index&amp;a=news_detail&amp;id=3738&amp;web=chinese">关于班车2号线始发站点调整的通知</a><span class="date2">2018-11-05</span></li><li><span class="square"></span><a style="width:500px;" href="index.php?c=index&amp;a=news_detail&amp;id=3725&amp;web=chinese">关于举办杭州电子科技大学信息工程学院第二届田径运动会的通知</a><span class="date2">2018-11-01</span></li><li><span class="square"></span><a style="width:500px;" href="index.php?c=index&amp;a=news_detail&amp;id=3715&amp;web=chinese">信息工程学院分工会关于“享秋日情韵、与健康同行”活动的通知</a><span class="date2">2018-10-29</span></li><li><span class="square"></span><a style="width:500px;" href="index.php?c=index&amp;a=news_detail&amp;id=3676&amp;web=chinese">关于班车2号线恢复文一校区（北门公交站）停靠点的通知</a><span class="date2">2018-10-15</span></li><li><span class="square"></span><a style="width:500px;" href="index.php?c=index&amp;a=news_detail&amp;id=3658&amp;web=chinese">关于举办杭州电子科技大学信息工程学院图书馆数字资源使用培训讲座的通知</a><span class="date2">2018-09-30</span></li><li><span class="square"></span><a style="width:500px;" href="index.php?c=index&amp;a=news_detail&amp;id=3657&amp;web=chinese">          
+            </ul>
+            
+        </div>
+
+            </div>
         </div>
         <div class="footer">
             <p>
                 &copy;copyright 2018 超方系统 cfxt 版权所有 310</p>
         </div>
     </div>
+
 </body>
 </html>

@@ -115,7 +115,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
 
-    <div class="banner">
+ <div class="banner">
         <div class="bgh">
             <div class="page">
                 <div id="logo">
@@ -124,9 +124,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </a>
                 </div>
                 <div class="topxx" style="padding-top: 20px;font-size: 12px;">
-                     910513201419学员：邹智，欢迎您！ <a href="MyInfo.jsp">我的信息</a> <a href="systemMsge.jsp">
-                        通知</a> <a href="ChangePasswd.jsp">密码修改</a> <a onclick="loginOut()"
-                            href="javascript:">安全退出</a>
+                     	学员：小明，欢迎您！ <a href="myinfo">我的信息</a> <a href="InfoNotice">
+                        通知</a> <a href="chPwd">密码修改</a> <a href="login">安全退出</a>
                 </div>
                 
             </div>
@@ -143,12 +142,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
                     <div class="cdlist">
                         <div>
-                            <a href="MyInfo.jsp">我的信息</a></div>
+                            <a href="myinfo">我的信息</a></div>
                         <div>
-                            <a href="ClassInfo.jsp">报名信息 </a>
+                            <a href="signList">报名信息 </a>
                         </div>
                         <div>
-                            <a href="PayInfo.jsp">缴费信息</a></div>
+                            <a href="PayInfo">缴费信息</a></div>
                        
                     </div>
                     <div class="ta1">
@@ -158,9 +157,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
                     <div class="cdlist">
                         <div>
-                            <a href="Application.jsp">我要报名</a></div>
+                            <a href="signUp">我要报名</a></div>
                         <div>
-                            <a href="Score.jsp">我的成绩</a></div>
+                        	<a href="cancelSignUp">取消报名</a></div>
+                        <div>
+                            <a href="signList">我的报名信息</a></div>
+                        <div>
+                            <a href="checkscore">我的成绩</a></div>
                     </div>
                     <div class="ta1">
                         <strong>学习中心</strong><div class="leftbgbt2">
@@ -168,11 +171,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
                     <div class="cdlist">
                         <div>
-                            <a href="StudentMaterial.jsp">资料下载</a></div>
+                            <a href="downloadData">资料下载</a></div>
                         <div>
-                            <a href="index.jsp">111111</a></div>
+                            <a href="#">学习中心</a></div>
                         <div>
-                            <a href="index.jsp">111111</a></div>
+                            <a href="#">学习历程</a></div>
                     </div>
                    
                     <div class="ta1">
@@ -181,20 +184,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
                     <div class="cdlist">
                         <div>
-                            <a href="wdcw.jsp">信息通知</a></div>
+                            <a href="xxtz">信息通知</a></div>
                         <div>
-                            <a href="index.jsp">111111</a></div>
+                            <a href="#">温馨提示</a></div>
                         <div>
-                            <a href="index.jsp">111111</a></div>
+                         	<a href="studentMain">回到主页</a></div>
                         <div>
-                            <a href="index.jsp">111111</a></div>
                     </div>
 
                 </div>
             </div>
+            </div>
             <div class="rightbox">
 
-<h2 class="mbx">个人中心 &gt; 报名信息</h2>
+<h2 class="mbx">教务中心 &gt; 取消报名</h2>
 <div class="cztable">
     <div style="padding-bottom:20px;">
         <table border="0" cellspacing="0" cellpadding="0" width="100%">

@@ -38,6 +38,10 @@ public class StudentManager {
 	@Autowired
     SubjectsService SubjectsService;
 	
+	@RequestMapping("studentMain")
+   	public String studentMain(){
+   		return "studentMain";
+   	}
 	@RequestMapping("chPwd")
    	public String ChPwd(){
    		return "changePasswd";

@@ -108,7 +108,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body onload="init()">
 
-    <div class="banner">
+ <div class="banner">
         <div class="bgh">
             <div class="page">
                 <div id="logo">
@@ -117,9 +117,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </a>
                 </div>
                 <div class="topxx" style="padding-top: 20px;font-size: 12px;">
-                     910513201419学员：邹智，欢迎您！ <a href="MyInfo.jsp">我的信息</a> <a href="systemMsge.jsp">
-                        通知</a> <a href="ChangePasswd.jsp">密码修改</a> <a onclick="loginOut()"
-                            href="javascript:">安全退出</a>
+                     	学员：小明，欢迎您！ <a href="myinfo">我的信息</a> <a href="InfoNotice">
+                        通知</a> <a href="chPwd">密码修改</a> <a href="login">安全退出</a>
                 </div>
                 
             </div>
@@ -136,12 +135,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
                     <div class="cdlist">
                         <div>
-                            <a href="MyInfo.jsp">我的信息</a></div>
+                            <a href="myinfo">我的信息</a></div>
                         <div>
-                            <a href="ClassInfo.jsp">报名信息 </a>
+                            <a href="signList">报名信息 </a>
                         </div>
                         <div>
-                            <a href="PayInfo.jsp">缴费信息</a></div>
+                            <a href="PayInfo">缴费信息</a></div>
                        
                     </div>
                     <div class="ta1">
@@ -151,9 +150,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
                     <div class="cdlist">
                         <div>
-                            <a href="Application.jsp">我要报名</a></div>
+                            <a href="signUp">我要报名</a></div>
                         <div>
-                            <a href="Score.jsp">我的成绩</a></div>
+                        	<a href="cancelSignUp">取消报名</a></div>
+                        <div>
+                            <a href="signList">我的报名信息</a></div>
+                        <div>
+                            <a href="checkscore">我的成绩</a></div>
                     </div>
                     <div class="ta1">
                         <strong>学习中心</strong><div class="leftbgbt2">
@@ -161,11 +164,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
                     <div class="cdlist">
                         <div>
-                            <a href="StudentMaterial.jsp">资料下载</a></div>
+                            <a href="downloadData">资料下载</a></div>
                         <div>
-                            <a href="index.jsp">111111</a></div>
+                            <a href="#">学习中心</a></div>
                         <div>
-                            <a href="index.jsp">111111</a></div>
+                            <a href="#">学习历程</a></div>
                     </div>
                    
                     <div class="ta1">
@@ -174,16 +177,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
                     <div class="cdlist">
                         <div>
-                            <a href="wdcw.jsp">信息通知</a></div>
+                            <a href="xxtz">信息通知</a></div>
                         <div>
-                            <a href="index.jsp">111111</a></div>
+                            <a href="#">温馨提示</a></div>
                         <div>
-                            <a href="index.jsp">111111</a></div>
+                         	<a href="studentMain">回到主页</a></div>
                         <div>
-                            <a href="index.jsp">111111</a></div>
                     </div>
 
                 </div>
+            </div>
             </div>
             <div class="rightbox">
 <h2 class="mbx">教务中心 &gt; 点击报名 &nbsp;&nbsp;&nbsp;</h2>
@@ -197,7 +200,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <td align="right" width="90">身份证号码：</td>
             <td>${user.idcard}&nbsp;</td>
             
-            <td rowspan="9"><div align="center"><img id="pic_face"  height="160" width="120" src="../Images/Student/photo.jpg"/ style="padding:2px 2px 5px; border:1px #ddd solid;"></div>&nbsp;</td>
+            <td rowspan="9"><div align="center"><img id="pic_face"  height="160" width="120" src="/photo/${user.photo}" style="padding:2px 2px 5px; border:1px #ddd solid;"></div>&nbsp;</td>
         </tr>
         <tr>
             <td align="right">性别：</td>
