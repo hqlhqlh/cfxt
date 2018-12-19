@@ -121,9 +121,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </a>
                 </div>
                 <div class="topxx" style="padding-top: 20px;font-size: 12px;">
-                     	学员：小明，欢迎您！ <a href="myinfo">我的信息</a> <a href="../StudentInfor/systemMsge.aspx.html">
-                        通知</a> <a href="chPwd">密码修改</a> <a onclick="loginOut()"
-                            href="javascript:">安全退出</a>
+                     	学员：小明，欢迎您！ <a href="myinfo">我的信息</a> <a href="InfoNotice">
+                        通知</a> <a href="chPwd">密码修改</a> <a 
+                            href="login">安全退出</a>
                 </div>
                 
             </div>
@@ -142,10 +142,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <div>
                             <a href="myinfo">我的信息</a></div>
                         <div>
-                            <a href="ClassInfo.aspx.html">报名信息 </a>
+                            <a href="signList">报名信息 </a>
                         </div>
                         <div>
-                            <a href="../User/StudentInfor/Letter.aspx.html">缴费信息</a></div>
+                            <a href="PayInfo">缴费信息</a></div>
                        
                     </div>
                     <div class="ta1">
