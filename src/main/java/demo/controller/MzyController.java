@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import demo.model.Pass;
 import demo.model.Sign;
 import demo.model.User;
 import demo.model.Subjects;
 import demo.service.UserService;
 import demo.service.SignService;
 import demo.service.SubjectsService;
+import demo.service.PassService;
 
 
 @Controller
@@ -30,11 +32,20 @@ public class MzyController {
 	UserService UserService;
 	@Autowired
 	SubjectsService SubjectsService;
+	@Autowired
+	PassService PassService;
+	
 	
 	@RequestMapping("PayInfo")
 	public String PayInfo(){
 		return "PayInfo";
 	}
+	
+	@RequestMapping("sGradeRevision")
+	public String sGradeRevision(){
+		return "sGradeRevision";
+	}
+	
 	
 	//显示需要缴费的内容
 	@RequestMapping(value = "/PayInfo", method = RequestMethod.GET)
@@ -80,6 +91,19 @@ public class MzyController {
 	    	
 	    	return "缴费失败，重新缴费";
 	   	}
+		
+		//显示所有学生考试成绩
+		@RequestMapping(value = "/showAllGrade", method = RequestMethod.GET)
+	   	public String showAllGrade(Model model,HttpServletRequest request){
+	    	List<Pass> passList =  new ArrayList();
+	    	for(int i = 0;i<PassService.findList().size();i++){
+	    		Pass pass = PassService.findList().get(i);
+	    		passList.add(pass);
+	    	}
+	    	model.addAttribute("passList",passList);
+	    	return "PayInfo";
+	   	}
+		
 
 
 }

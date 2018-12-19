@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="demo.dao.PassDAO">
+  <resultMap id="BaseResultMap" type="demo.model.Pass">
+    <id column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="subject" jdbcType="VARCHAR" property="subject" />
+    <result column="idcard" jdbcType="VARCHAR" property="idcard" />
+    <result column="score" jdbcType="DOUBLE" property="score" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    pid, subject, idcard, score, username
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from pass
+    where pid = #{pid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from pass
+    where pid = #{pid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="pid" keyProperty="pid" parameterType="demo.model.Pass" useGeneratedKeys="true">
+    insert into pass (subject, idcard, score, 
+      username)
+    values (#{subject,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, #{score,jdbcType=DOUBLE}, 
+      #{username,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="pid" keyProperty="pid" parameterType="demo.model.Pass" useGeneratedKeys="true">
+    insert into pass
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="subject != null">
+        subject,
+      </if>
+      <if test="idcard != null">
+        idcard,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="subject != null">
+        #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=DOUBLE},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="demo.model.Pass">
+    update pass
+    <set>
+      <if test="subject != null">
+        subject = #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        idcard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=DOUBLE},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="demo.model.Pass">
+    update pass
+    set subject = #{subject,jdbcType=VARCHAR},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      score = #{score,jdbcType=DOUBLE},
+      username = #{username,jdbcType=VARCHAR}
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+</mapper>
