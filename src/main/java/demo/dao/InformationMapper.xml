@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="demo.dao.InformationMapper">
+  <resultMap id="BaseResultMap" type="demo.model.Information">
+    <id column="xid" jdbcType="INTEGER" property="xid" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="publishedtime" jdbcType="TIMESTAMP" property="publishedtime" />
+    <result column="publisher" jdbcType="VARCHAR" property="publisher" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    xid, title, content, publishedtime, publisher
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from information
+    where xid = #{xid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"></include>
+  	from information
+  </select>
+  <select id="selectBylimit" resultMap="BaseResultMap">  
+        select *
+        from information limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}   
+   </select> 
+    <select id="selectcount" resultType="java.lang.Integer">
+	select
+	count(*)
+	from information
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from information
+    where xid = #{xid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="xid" keyProperty="xid" parameterType="demo.model.Information" useGeneratedKeys="true">
+    insert into information (title, content, publishedtime, 
+      publisher)
+    values (#{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{publishedtime,jdbcType=TIMESTAMP}, 
+      #{publisher,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="xid" keyProperty="xid" parameterType="demo.model.Information" useGeneratedKeys="true">
+    insert into information
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        title,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="publishedtime != null">
+        publishedtime,
+      </if>
+      <if test="publisher != null">
+        publisher,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="publishedtime != null">
+        #{publishedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="publisher != null">
+        #{publisher,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="demo.model.Information">
+    update information
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="publishedtime != null">
+        publishedtime = #{publishedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="publisher != null">
+        publisher = #{publisher,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where xid = #{xid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="demo.model.Information">
+    update information
+    set title = #{title,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      publishedtime = #{publishedtime,jdbcType=TIMESTAMP},
+      publisher = #{publisher,jdbcType=VARCHAR}
+    where xid = #{xid,jdbcType=INTEGER}
+  </update>
+</mapper>

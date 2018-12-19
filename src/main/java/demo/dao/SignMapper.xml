@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="demo.dao.SignMapper">
+  <resultMap id="BaseResultMap" type="demo.model.Sign">
+    <id column="signid" jdbcType="INTEGER" property="signid" />
+    <result column="idcard" jdbcType="VARCHAR" property="idcard" />
+    <result column="subject" jdbcType="VARCHAR" property="subject" />
+    <result column="testtime" jdbcType="TIMESTAMP" property="testtime" />
+    <result column="testplace" jdbcType="VARCHAR" property="testplace" />
+    <result column="signtime" jdbcType="DATE" property="signtime" />
+    <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    signid, idcard, subject, testtime, testplace, signtime, price, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sign
+    where signid = #{signid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sign
+    where signid = #{signid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="demo.model.Sign">
+    <selectKey keyProperty="signid" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sign (idcard, subject, testtime, 
+      testplace, signtime, price, 
+      status)
+    values (#{idcard,jdbcType=VARCHAR}, #{subject,jdbcType=VARCHAR}, #{testtime,jdbcType=TIMESTAMP}, 
+      #{testplace,jdbcType=VARCHAR}, #{signtime,jdbcType=DATE}, #{price,jdbcType=INTEGER}, 
+      #{status,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="demo.model.Sign">
+    <selectKey keyProperty="signid" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sign
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="idcard != null">
+        idcard,
+      </if>
+      <if test="subject != null">
+        subject,
+      </if>
+      <if test="testtime != null">
+        testtime,
+      </if>
+      <if test="testplace != null">
+        testplace,
+      </if>
+      <if test="signtime != null">
+        signtime,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="idcard != null">
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null">
+        #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="testtime != null">
+        #{testtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="testplace != null">
+        #{testplace,jdbcType=VARCHAR},
+      </if>
+      <if test="signtime != null">
+        #{signtime,jdbcType=DATE},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="demo.model.Sign">
+    update sign
+    <set>
+      <if test="idcard != null">
+        idcard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null">
+        subject = #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="testtime != null">
+        testtime = #{testtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="testplace != null">
+        testplace = #{testplace,jdbcType=VARCHAR},
+      </if>
+      <if test="signtime != null">
+        signtime = #{signtime,jdbcType=DATE},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where signid = #{signid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="demo.model.Sign">
+    update sign
+    set idcard = #{idcard,jdbcType=VARCHAR},
+      subject = #{subject,jdbcType=VARCHAR},
+      testtime = #{testtime,jdbcType=TIMESTAMP},
+      testplace = #{testplace,jdbcType=VARCHAR},
+      signtime = #{signtime,jdbcType=DATE},
+      price = #{price,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR}
+    where signid = #{signid,jdbcType=INTEGER}
+  </update>
+</mapper>

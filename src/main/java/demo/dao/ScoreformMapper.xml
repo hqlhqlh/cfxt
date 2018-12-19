@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="demo.dao.ScoreformMapper">
+  <resultMap id="BaseResultMap" type="demo.model.Scoreform">
+    <id column="scoreid" jdbcType="INTEGER" property="scoreid" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="idcard" jdbcType="VARCHAR" property="idcard" />
+    <result column="subject" jdbcType="VARCHAR" property="subject" />
+    <result column="testtime" jdbcType="TIMESTAMP" property="testtime" />
+    <result column="score" jdbcType="DOUBLE" property="score" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    scoreid, username, idcard, subject, testtime, score, `status`
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from scoreform
+    where scoreid = #{scoreid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from scoreform
+    where scoreid = #{scoreid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="scoreid" keyProperty="scoreid" parameterType="demo.model.Scoreform" useGeneratedKeys="true">
+    insert into scoreform (username, idcard, subject, 
+      testtime, score, `status`
+      )
+    values (#{username,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, #{subject,jdbcType=VARCHAR}, 
+      #{testtime,jdbcType=TIMESTAMP}, #{score,jdbcType=DOUBLE}, #{status,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="scoreid" keyProperty="scoreid" parameterType="demo.model.Scoreform" useGeneratedKeys="true">
+    insert into scoreform
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="username != null">
+        username,
+      </if>
+      <if test="idcard != null">
+        idcard,
+      </if>
+      <if test="subject != null">
+        subject,
+      </if>
+      <if test="testtime != null">
+        testtime,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null">
+        #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="testtime != null">
+        #{testtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="demo.model.Scoreform">
+    update scoreform
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        idcard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null">
+        subject = #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="testtime != null">
+        testtime = #{testtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where scoreid = #{scoreid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="demo.model.Scoreform">
+    update scoreform
+    set username = #{username,jdbcType=VARCHAR},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      subject = #{subject,jdbcType=VARCHAR},
+      testtime = #{testtime,jdbcType=TIMESTAMP},
+      score = #{score,jdbcType=DOUBLE},
+      `status` = #{status,jdbcType=VARCHAR}
+    where scoreid = #{scoreid,jdbcType=INTEGER}
+  </update>
+</mapper>

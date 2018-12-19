@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="demo.dao.ExamMapper">
+  <resultMap id="BaseResultMap" type="demo.model.Exam">
+    <id column="eid" jdbcType="INTEGER" property="eid" />
+    <result column="idcard" jdbcType="VARCHAR" property="idcard" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="subject" jdbcType="VARCHAR" property="subject" />
+    <result column="testtime" jdbcType="TIMESTAMP" property="testtime" />
+    <result column="testplace" jdbcType="VARCHAR" property="testplace" />
+    <result column="roomnum" jdbcType="VARCHAR" property="roomnum" />
+    <result column="seatnum" jdbcType="VARCHAR" property="seatnum" />
+    <result column="examnum" jdbcType="VARCHAR" property="examnum" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    eid, idcard, username, subject, testtime, testplace, roomnum, seatnum, examnum
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from exam
+    where eid = #{eid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from exam
+    where eid = #{eid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="demo.model.Exam">
+    <selectKey keyProperty="eid" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into exam (idcard, username, subject, 
+      testtime, testplace, roomnum, 
+      seatnum, examnum)
+    values (#{idcard,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{subject,jdbcType=VARCHAR}, 
+      #{testtime,jdbcType=TIMESTAMP}, #{testplace,jdbcType=VARCHAR}, #{roomnum,jdbcType=VARCHAR}, 
+      #{seatnum,jdbcType=VARCHAR}, #{examnum,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="demo.model.Exam">
+    <selectKey keyProperty="eid" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into exam
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="idcard != null">
+        idcard,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="subject != null">
+        subject,
+      </if>
+      <if test="testtime != null">
+        testtime,
+      </if>
+      <if test="testplace != null">
+        testplace,
+      </if>
+      <if test="roomnum != null">
+        roomnum,
+      </if>
+      <if test="seatnum != null">
+        seatnum,
+      </if>
+      <if test="examnum != null">
+        examnum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="idcard != null">
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null">
+        #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="testtime != null">
+        #{testtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="testplace != null">
+        #{testplace,jdbcType=VARCHAR},
+      </if>
+      <if test="roomnum != null">
+        #{roomnum,jdbcType=VARCHAR},
+      </if>
+      <if test="seatnum != null">
+        #{seatnum,jdbcType=VARCHAR},
+      </if>
+      <if test="examnum != null">
+        #{examnum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="demo.model.Exam">
+    update exam
+    <set>
+      <if test="idcard != null">
+        idcard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null">
+        subject = #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="testtime != null">
+        testtime = #{testtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="testplace != null">
+        testplace = #{testplace,jdbcType=VARCHAR},
+      </if>
+      <if test="roomnum != null">
+        roomnum = #{roomnum,jdbcType=VARCHAR},
+      </if>
+      <if test="seatnum != null">
+        seatnum = #{seatnum,jdbcType=VARCHAR},
+      </if>
+      <if test="examnum != null">
+        examnum = #{examnum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where eid = #{eid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="demo.model.Exam">
+    update exam
+    set idcard = #{idcard,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      subject = #{subject,jdbcType=VARCHAR},
+      testtime = #{testtime,jdbcType=TIMESTAMP},
+      testplace = #{testplace,jdbcType=VARCHAR},
+      roomnum = #{roomnum,jdbcType=VARCHAR},
+      seatnum = #{seatnum,jdbcType=VARCHAR},
+      examnum = #{examnum,jdbcType=VARCHAR}
+    where eid = #{eid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="demo.dao.InvigilateMapper">
+  <resultMap id="BaseResultMap" type="demo.model.Invigilate">
+    <id column="invid" jdbcType="INTEGER" property="invid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="subject" jdbcType="VARCHAR" property="subject" />
+    <result column="teacher1id" jdbcType="VARCHAR" property="teacher1id" />
+    <result column="teacher2id" jdbcType="VARCHAR" property="teacher2id" />
+    <result column="testtime" jdbcType="TIMESTAMP" property="testtime" />
+    <result column="testplace" jdbcType="VARCHAR" property="testplace" />
+    <result column="roomnum" jdbcType="VARCHAR" property="roomnum" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    invid, uid, subject, teacher1id, teacher2id, testtime, testplace, roomnum
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from invigilate
+    where invid = #{invid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from invigilate
+    where invid = #{invid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="demo.model.Invigilate">
+    <selectKey keyProperty="invid" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into invigilate (uid, subject, teacher1id, 
+      teacher2id, testtime, testplace, 
+      roomnum)
+    values (#{uid,jdbcType=INTEGER}, #{subject,jdbcType=VARCHAR}, #{teacher1id,jdbcType=VARCHAR}, 
+      #{teacher2id,jdbcType=VARCHAR}, #{testtime,jdbcType=TIMESTAMP}, #{testplace,jdbcType=VARCHAR}, 
+      #{roomnum,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="demo.model.Invigilate">
+    <selectKey keyProperty="invid" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into invigilate
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="subject != null">
+        subject,
+      </if>
+      <if test="teacher1id != null">
+        teacher1id,
+      </if>
+      <if test="teacher2id != null">
+        teacher2id,
+      </if>
+      <if test="testtime != null">
+        testtime,
+      </if>
+      <if test="testplace != null">
+        testplace,
+      </if>
+      <if test="roomnum != null">
+        roomnum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="subject != null">
+        #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="teacher1id != null">
+        #{teacher1id,jdbcType=VARCHAR},
+      </if>
+      <if test="teacher2id != null">
+        #{teacher2id,jdbcType=VARCHAR},
+      </if>
+      <if test="testtime != null">
+        #{testtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="testplace != null">
+        #{testplace,jdbcType=VARCHAR},
+      </if>
+      <if test="roomnum != null">
+        #{roomnum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="demo.model.Invigilate">
+    update invigilate
+    <set>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="subject != null">
+        subject = #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="teacher1id != null">
+        teacher1id = #{teacher1id,jdbcType=VARCHAR},
+      </if>
+      <if test="teacher2id != null">
+        teacher2id = #{teacher2id,jdbcType=VARCHAR},
+      </if>
+      <if test="testtime != null">
+        testtime = #{testtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="testplace != null">
+        testplace = #{testplace,jdbcType=VARCHAR},
+      </if>
+      <if test="roomnum != null">
+        roomnum = #{roomnum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where invid = #{invid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="demo.model.Invigilate">
+    update invigilate
+    set uid = #{uid,jdbcType=INTEGER},
+      subject = #{subject,jdbcType=VARCHAR},
+      teacher1id = #{teacher1id,jdbcType=VARCHAR},
+      teacher2id = #{teacher2id,jdbcType=VARCHAR},
+      testtime = #{testtime,jdbcType=TIMESTAMP},
+      testplace = #{testplace,jdbcType=VARCHAR},
+      roomnum = #{roomnum,jdbcType=VARCHAR}
+    where invid = #{invid,jdbcType=INTEGER}
+  </update>
+</mapper>
