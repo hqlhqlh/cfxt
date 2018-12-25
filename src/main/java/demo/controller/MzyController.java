@@ -22,7 +22,13 @@ import demo.service.SignService;
 import demo.service.SubjectsService;
 import demo.service.PassService;
 
-
+/**
+ * 缴费信息类
+ * 
+ * @author: MZY
+ * @className: MzyController
+ * @packageName: demo.controller
+ **/
 @Controller
 @RequestMapping("")
 public class MzyController {
@@ -46,8 +52,14 @@ public class MzyController {
 		return "sGradeRevision";
 	}
 	
-	
-	//显示需要缴费的内容
+	/**
+	* 显示需要缴费的内容
+	* 
+	* @author:  MZY
+	* @methodsName: PayInfo
+	* @param:  request HttpServletRequest类，获取session
+	* @param:  model 前台传参
+	*/
 	@RequestMapping(value = "/PayInfo", method = RequestMethod.GET)
    	public String PayInfo(Model model,HttpServletRequest request){
 		int uid = (int)request.getSession().getAttribute("uid");
@@ -72,38 +84,75 @@ public class MzyController {
     	return "PayInfo";
    	}
 	
-	
-	//立即缴费
-		@RequestMapping(value = "/pay", method = RequestMethod.POST)
-		@ResponseBody
-	   	public String pay(Model model,HttpServletRequest request,
-	   			@RequestParam(value = "signid") int signid){
-			System.out.println(signid + "...");
-	    	for(int i = 0;i<SignService.findList().size();i++){
-	    		Sign sign = SignService.findList().get(i);
-	    		if(sign.getSignid().equals(signid)){
-	    			//model.addAttribute("sign",sign);
-	    			sign.setStatus("1");
-	    			SignService.update(sign);
-	    			return "缴费成功";
-	    		}
-	    	}
-	    	
-	    	return "缴费失败，重新缴费";
-	   	}
+	/**
+	* 立即缴费
+	* 
+	* @author:  MZY
+	* @methodsName: pay
+	* @param:  signid 报名记录的id
+	* @param:  model 前台传参
+	*/
+	@RequestMapping(value = "/pay", method = RequestMethod.POST)
+	@ResponseBody
+   	public String pay(Model model,@RequestParam(value = "signid") int signid){
+		//System.out.println(signid + "...");
+    	for(int i = 0;i<SignService.findList().size();i++){
+    		Sign sign = SignService.findList().get(i);
+    		if(sign.getSignid().equals(signid)){
+    			//model.addAttribute("sign",sign);
+    			sign.setStatus("1");
+    			SignService.update(sign);
+    			return "缴费成功";
+    		}
+    	}
+    	return "缴费失败，重新缴费";
+   	}
+	/**
+	* 显示所有学生考试成绩
+	* 
+	* @author:  MZY
+	* @methodsName: sGradeRevision
+	* @param:  model 前台传参
+	*/	
+	@RequestMapping(value = "/sGradeRevision", method = RequestMethod.GET)
+   	public String sGradeRevision(Model model){
+    	List<Pass> passList =  new ArrayList();
+    	for(int i = 0;i<PassService.findList().size();i++){
+    		Pass pass = PassService.findList().get(i);
+    		passList.add(pass);
+    	}
+    	model.addAttribute("passList",passList);
+    	return "sGradeRevision";
+   	}
+	/**
+	* 修改某一考生的成绩
+	* 
+	* @author:  MZY
+	* @methodsName: changeScore
+	* @param:  newscore 心得成绩
+	* @param:  pid pass表的id
+	* @param:  model 前台传参
+	*/
+	@RequestMapping(value = "/changeScore", method = RequestMethod.POST)
+	@ResponseBody
+   	public String changeScore(Model model,HttpServletRequest request,
+   			@RequestParam(value = "newscore") double newscore,
+   			@RequestParam(value = "pid") int pid){
 		
-		//显示所有学生考试成绩
-		@RequestMapping(value = "/showAllGrade", method = RequestMethod.GET)
-	   	public String showAllGrade(Model model,HttpServletRequest request){
-	    	List<Pass> passList =  new ArrayList();
-	    	for(int i = 0;i<PassService.findList().size();i++){
-	    		Pass pass = PassService.findList().get(i);
-	    		passList.add(pass);
-	    	}
-	    	model.addAttribute("passList",passList);
-	    	return "PayInfo";
-	   	}
-		
-
+		System.out.println("11111");
+    	List<Pass> passList =  new ArrayList();
+    	for(int i = 0;i<PassService.findList().size();i++){
+    		Pass pass = PassService.findList().get(i);
+    		if(pass.getPid().equals(pid)){
+    			System.out.println(pass.getScore());
+    			System.out.println(newscore);
+    			pass.setScore(newscore);
+    			PassService.update(pass);
+    			return "修改成功";
+    		}
+    	}
+    	
+    	return "修改失败";
+   	}
 
 }
