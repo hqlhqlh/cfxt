@@ -44,6 +44,6 @@ public class UserService {
 			return UserMapper.update(uid, username, sex, idcard, nation, edu, nativeplace, email,photo);
 			
 		}
-	
+	    
 	    
 }

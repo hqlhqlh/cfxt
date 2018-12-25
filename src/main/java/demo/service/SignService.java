@@ -30,4 +30,7 @@ public class SignService {
     public List<Sign> findList() {
         return SignMapper.findList();
     }
+    public List<Sign> selectAll() {
+        return SignMapper.selectAll();
+    }
 }

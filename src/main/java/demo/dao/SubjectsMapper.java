@@ -26,4 +26,7 @@ public interface SubjectsMapper {
     
     @Select("select * from subjects")
     List<Subjects> findList();
+    
+    @Select("select testtime from subjects where subject = '${subject}'")
+   	String selectBySubject2(@Param("subject")String subject);
 }

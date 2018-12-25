@@ -20,6 +20,11 @@
     from sign
     where signid = #{signid,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"></include>
+  	from sign
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sign
     where signid = #{signid,jdbcType=INTEGER}

@@ -22,7 +22,9 @@ public interface ScoreformMapper {
     List<Scoreform> selectByIdcard(@Param("idcard")String idcard);
     
     int updateByPrimaryKey(Scoreform record);
-
+    
+    @Select("select * from scoreform where subject = '${subject}'")
+    List<Scoreform> findListSubtsTpl(@Param("subject")String subject,@Param("testplace")String testplace);
 		
 	List<Scoreform> selectAll();
 

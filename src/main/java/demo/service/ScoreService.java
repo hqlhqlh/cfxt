@@ -21,4 +21,12 @@ public class ScoreService {
 	public List<Scoreform> selectAll() {
         return scoreformMapper.selectAll();
     }
+	public int add(Scoreform scoreform) {
+		 return scoreformMapper.insert(scoreform);
+		
+	}
+	
+	 public List<Scoreform> findListSubtsTpl(String subject,String testplace) {
+	        return scoreformMapper.findListSubtsTpl(subject, testplace);
+	 }
 }

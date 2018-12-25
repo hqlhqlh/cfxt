@@ -5,14 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import demo.dao.PassDAO;
+import demo.dao.PassMapper;
 import demo.model.Pass;
 import demo.model.Sign;
 
 @Service
 public class PassService {
 	@Autowired
-	private PassDAO PassMapper;
+	private PassMapper PassMapper;
 	
 	public int add(Pass Pass) {
 		return PassMapper.insert(Pass);

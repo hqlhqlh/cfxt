@@ -22,4 +22,6 @@ public interface SignMapper {
     
     @Select("select * from sign")
     List<Sign> findList();
+
+	List<Sign> selectAll();
 }

@@ -28,7 +28,7 @@ public class InvigilateService {
     }
     
     public List<Invigilate> findList() {
-        return InvigilateMapper.selectAll();
+        return InvigilateMapper.findList();
     }
     
     

@@ -34,4 +34,10 @@ public class SubjectsService {
     public List<Subjects> selectBySubject(String subject) {
         return SubjectsMapper.selectBySubject(subject);
     }
+    public String selectBySubject2(String subject ) {
+        return SubjectsMapper.selectBySubject2(subject);
+    }
+	public List<Subjects> selectAll() {
+        return SubjectsMapper.findList();
+    }
 }
